@@ -5,18 +5,17 @@ if (year) {
     year.textContent = new Date().getFullYear();
 }
 
-function updateBackToTop() {
-    if (backToTop) {
-        backToTop.hidden = window.scrollY < 600;
-    }
-}
-
 if (backToTop) {
+    window.addEventListener("scroll", function () {
+        if (window.scrollY >= 600) {
+            backToTop.hidden = false;
+        } else {
+            backToTop.hidden = true;
+        }
+    });
+
     backToTop.addEventListener("click", function () {
         window.scrollTo(0, 0);
         document.querySelector(".skip-link").focus();
     });
-
-    window.addEventListener("scroll", updateBackToTop);
-    updateBackToTop();
 }

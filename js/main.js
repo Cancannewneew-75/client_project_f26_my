@@ -1,20 +1,22 @@
-const yearElements = document.querySelectorAll("[data-current-year]");
-const backToTopButton = document.querySelector(".back-to-top");
+const year = document.querySelector("[data-current-year]");
+const backToTop = document.querySelector(".back-to-top");
 
-yearElements.forEach((element) => {
-    element.textContent = new Date().getFullYear();
-});
+if (year) {
+    year.textContent = new Date().getFullYear();
+}
 
-if (backToTopButton) {
-    const updateBackToTopButton = () => {
-        backToTopButton.hidden = window.scrollY < 600;
-    };
+function updateBackToTop() {
+    if (backToTop) {
+        backToTop.hidden = window.scrollY < 600;
+    }
+}
 
-    backToTopButton.addEventListener("click", () => {
-        window.scrollTo({ top: 0 });
-        document.querySelector(".skip-link")?.focus();
+if (backToTop) {
+    backToTop.addEventListener("click", function () {
+        window.scrollTo(0, 0);
+        document.querySelector(".skip-link").focus();
     });
 
-    window.addEventListener("scroll", updateBackToTopButton, { passive: true });
-    updateBackToTopButton();
+    window.addEventListener("scroll", updateBackToTop);
+    updateBackToTop();
 }
